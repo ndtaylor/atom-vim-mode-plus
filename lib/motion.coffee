@@ -605,7 +605,8 @@ class MoveToBeginningOfLine extends Motion
   @extend()
 
   moveCursor: (cursor) ->
-    setBufferColumn(cursor, 0)
+    #setBufferColumn(cursor, 0)
+    cursor.moveToBeginningOfScreenLine()
 
 class MoveToColumn extends Motion
   @extend()
@@ -617,8 +618,9 @@ class MoveToLastCharacterOfLine extends Motion
   @extend()
 
   moveCursor: (cursor) ->
-    row = getValidVimBufferRow(@editor, cursor.getBufferRow() + @getCount(-1))
-    cursor.setBufferPosition([row, Infinity])
+    #row = getValidVimBufferRow(@editor, cursor.getBufferRow() + @getCount(-1))
+    #cursor.setBufferPosition([row, Infinity])
+    cursor.moveToEndOfScreenLine()
     cursor.goalColumn = Infinity
 
 class MoveToLastNonblankCharacterOfLineAndDown extends Motion
@@ -639,8 +641,9 @@ class MoveToLastNonblankCharacterOfLineAndDown extends Motion
 class MoveToFirstCharacterOfLine extends Motion
   @extend()
   moveCursor: (cursor) ->
-    point = @getFirstCharacterPositionForBufferRow(cursor.getBufferRow())
-    @setBufferPositionSafely(cursor, point)
+    #point = @getFirstCharacterPositionForBufferRow(cursor.getBufferRow())
+    #@setBufferPositionSafely(cursor, point)
+    cursor.moveToFirstCharacterOfLine()
 
 class MoveToFirstCharacterOfLineUp extends MoveToFirstCharacterOfLine
   @extend()
